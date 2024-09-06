@@ -22,14 +22,12 @@ public class ShopDbContext : DbContext
 
         var products = GetTestProducts();
         var customers = GetTestCustomersData();
-        var purchasesWithItems = GetTestPurchasesWithItems(products, customers);
+        var (purchases, purchaseItems) = GetTestPurchasesWithItems(products, customers);
         
         builder.Entity<ProductDb>().HasData(products);
         builder.Entity<CustomerDb>().HasData(customers);
-        builder.Entity<PurchaseDb>().HasData(purchasesWithItems);
-        builder.Entity<PurchaseItemDb>().HasData(
-            purchasesWithItems.SelectMany(x => x.PurchaseItems).ToArray()
-            );
+        builder.Entity<PurchaseDb>().HasData(purchases);
+        builder.Entity<PurchaseItemDb>().HasData(purchaseItems);
     }
     
 
@@ -166,12 +164,13 @@ public class ShopDbContext : DbContext
         return customers;
     }
 
-    private PurchaseDb[] GetTestPurchasesWithItems(
+    private (PurchaseDb[] purchases, PurchaseItemDb[] purchaseItems) GetTestPurchasesWithItems(
         ProductDb[] products,
         CustomerDb[] customers)
     {
         var random = new Random();
         var purchases = new List<PurchaseDb>();
+        var purchaseItems = new List<PurchaseItemDb>();
 
         foreach (var customer in customers)
         {
@@ -183,6 +182,7 @@ public class ShopDbContext : DbContext
                 {
                     Id = Guid.NewGuid(),
                     Number = $"ORD{random.Next(1000, 9999)}",
+                    CustomerId = customer.Id,
                     Date = DateTime.Now.AddDays(-random.Next(1, 100)),
                     PurchaseItems = new List<PurchaseItemDb>()
                 };
@@ -199,23 +199,18 @@ public class ShopDbContext : DbContext
                         Id = Guid.NewGuid(),
                         PurchaseId = purchase.Id,
                         ProductId = product.Id,
-                        Product = product,
                         Quantity = random.Next(1, 5)
                     };
                     
-                    purchase.PurchaseItems.Add(purchaseItem);
+                    purchaseItems.Add(purchaseItem);
                     totalAmount += product.Price * purchaseItem.Quantity;
                 }
                 
                 purchase.TotalAmount = totalAmount;
-                
-                customer.Purchases ??= new List<PurchaseDb>();
-                customer.Purchases.Add(purchase);
-                
                 purchases.Add(purchase);
             }
         }
 
-        return purchases.ToArray();
+        return (purchases.ToArray(), purchaseItems.ToArray());
     }
 }

@@ -1,15 +1,14 @@
-﻿using ShopManagement.Data.Repositories;
-using ShopManagement.Data.Repositories.Interfaces;
+﻿using ShopManagement.Data.Repositories.Interfaces;
 using ShopManagement.Logic.Mapping;
-using ShopManagement.Logic.Models;
 using ShopManagement.Logic.Responses.Birthday;
 using ShopManagement.Logic.Responses.FavoriteCategories;
 using ShopManagement.Logic.Responses.LastCustomers;
+using ShopManagement.Logic.Services.Interfaces;
 using ShopManagement.Logic.Specifications;
 
 namespace ShopManagement.Logic.Services;
 
-public class CustomerService
+public class CustomerService : ICustomerService
 {
     private readonly ICustomerRepository _customerRepository;
     private readonly IPurchaseRepository _purchaseRepository;
