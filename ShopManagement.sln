@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopManagement.API", "ShopM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopManagement.Core", "ShopManagement.Core\ShopManagement.Core.csproj", "{BB806DAA-10FF-405A-AE04-8A3097713E95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopManagement.Infrastructure", "ShopManagement.Infrastructure\ShopManagement.Infrastructure.csproj", "{EB1D707A-F5E2-4C41-92D0-A0069F2F0377}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopManagement.Data", "ShopManagement.Data\ShopManagement.Data.csproj", "{EB1D707A-F5E2-4C41-92D0-A0069F2F0377}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopManagement.Logic", "ShopManagement.Logic\ShopManagement.Logic.csproj", "{18D69C7C-43F3-46FF-808D-1D7F89D26F52}"
 EndProject

@@ -1,4 +1,4 @@
-﻿namespace ShopManagement.Core.Entities;
+﻿namespace ShopManagement.Logic.Models;
 
 public class PurchaseItem
 {

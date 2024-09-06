@@ -3,12 +3,8 @@
 public enum ProductCategory
 {
     Electronics,
-    Groceries,
-    Clothing,
-    Toys,
+    KitchenAppliances,
     Furniture,
-    Books,
-    Health,
-    Beauty,
+    HomeAppliances,
     Sports
 }

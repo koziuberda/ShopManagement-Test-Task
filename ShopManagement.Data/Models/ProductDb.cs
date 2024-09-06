@@ -1,8 +1,8 @@
 ﻿using ShopManagement.Core.Enums;
 
-namespace ShopManagement.Core.Entities;
+namespace ShopManagement.Data.Models;
 
-public class Product
+public class ProductDb
 {
     public Guid Id { get; set; }
     public string Name { get; set; }
