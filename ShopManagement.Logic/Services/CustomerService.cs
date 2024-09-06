@@ -1,7 +1,9 @@
 ﻿using ShopManagement.Data.Repositories.Interfaces;
 using ShopManagement.Logic.Mapping;
+using ShopManagement.Logic.Models;
 using ShopManagement.Logic.Responses.AllCustomers;
 using ShopManagement.Logic.Responses.Birthday;
+using ShopManagement.Logic.Responses.CustomerPurchases;
 using ShopManagement.Logic.Responses.FavoriteCategories;
 using ShopManagement.Logic.Responses.LastCustomers;
 using ShopManagement.Logic.Services.Interfaces;
@@ -49,5 +51,13 @@ public class CustomerService : ICustomerService
         var categoryGroups = await _purchaseRepository.GetPopularCategoriesByCustomerAsync(customerId);
         var categoriesDto = categoryGroups.Select(CustomerMapper.Map).ToList();
         return new FavoriteCategoriesResponse(customerId, categoriesDto);
+    }
+
+    public async Task<CustomerPurchasesResponse> GetCustomerPurchasesAsync(Guid customerId)
+    {
+        var spec = new CustomerWithPurchasesSpecification(customerId);
+        var customerWithDetails = await _customerRepository.FirstOrDefaultAsync(spec);
+        var purchases = customerWithDetails?.Purchases.Select(PurchaseMapper.Map).ToList();
+        return new CustomerPurchasesResponse(customerId, purchases ?? new List<Purchase>());
     }
 }

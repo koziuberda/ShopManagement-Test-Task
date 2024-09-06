@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShopManagement.Logic.Responses.AllCustomers;
 using ShopManagement.Logic.Responses.Birthday;
+using ShopManagement.Logic.Responses.CustomerPurchases;
 using ShopManagement.Logic.Responses.FavoriteCategories;
 using ShopManagement.Logic.Responses.LastCustomers;
 using ShopManagement.Logic.Services.Interfaces;
@@ -27,6 +28,18 @@ public class CustomerController : ControllerBase
     public async Task<IActionResult> GetAllCustomers()
     {
         var response = await _customerService.GetAllCustomers();
+        return Ok(response);
+    }
+    
+    /// <summary>
+    /// Get customer's purchases
+    /// </summary>
+    /// <response code="200"></response>
+    [HttpGet("get-customer-purchases/{customerId}")]
+    [ProducesResponseType(typeof(CustomerPurchasesResponse), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetCustomerPurchases([FromRoute] Guid customerId)
+    {
+        var response = await _customerService.GetCustomerPurchasesAsync(customerId);
         return Ok(response);
     }
     

@@ -1,5 +1,6 @@
 ﻿using ShopManagement.Logic.Responses.AllCustomers;
 using ShopManagement.Logic.Responses.Birthday;
+using ShopManagement.Logic.Responses.CustomerPurchases;
 using ShopManagement.Logic.Responses.FavoriteCategories;
 using ShopManagement.Logic.Responses.LastCustomers;
 
@@ -11,4 +12,5 @@ public interface ICustomerService
     Task<BirthdayResponse> GetCustomersByBirthdayAsync(DateTime date);
     Task<LastCustomersResponse> GetCustomersWithRecentPurchasesAsync(int nLastDays);
     Task<FavoriteCategoriesResponse> GetFavoriteCategoriesAsync(Guid customerId);
+    Task<CustomerPurchasesResponse> GetCustomerPurchasesAsync(Guid customerId);
 }
