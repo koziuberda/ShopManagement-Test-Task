@@ -1,5 +1,6 @@
 ﻿using ShopManagement.Data.Repositories.Interfaces;
 using ShopManagement.Logic.Mapping;
+using ShopManagement.Logic.Responses.AllCustomers;
 using ShopManagement.Logic.Responses.Birthday;
 using ShopManagement.Logic.Responses.FavoriteCategories;
 using ShopManagement.Logic.Responses.LastCustomers;
@@ -19,6 +20,13 @@ public class CustomerService : ICustomerService
     {
         _customerRepository = customerRepository;
         _purchaseRepository = purchaseRepository;
+    }
+
+    public async Task<AllCustomersResponse> GetAllCustomers()
+    {
+        var customers = await _customerRepository.ListAsync();
+        var customerDtos = customers.Select(CustomerMapper.MapInfo).ToList();
+        return new AllCustomersResponse(customerDtos);
     }
 
     public async Task<BirthdayResponse> GetCustomersByBirthdayAsync(DateTime date)

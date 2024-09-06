@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ShopManagement.Logic.Responses.AllCustomers;
 using ShopManagement.Logic.Responses.Birthday;
 using ShopManagement.Logic.Responses.FavoriteCategories;
 using ShopManagement.Logic.Responses.LastCustomers;
@@ -15,6 +16,18 @@ public class CustomerController : ControllerBase
     public CustomerController(ICustomerService customerService)
     {
         _customerService = customerService;
+    }
+    
+    /// <summary>
+    /// Get all customers
+    /// </summary>
+    /// <response code="200"></response>
+    [HttpGet("get-all-customers")]
+    [ProducesResponseType(typeof(AllCustomersResponse), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetAllCustomers()
+    {
+        var response = await _customerService.GetAllCustomers();
+        return Ok(response);
     }
     
     /// <summary>

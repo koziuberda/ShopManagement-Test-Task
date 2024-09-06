@@ -20,8 +20,4 @@
       <ProjectReference Include="..\ShopManagement.Logic\ShopManagement.Logic.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Responses\" />
-    </ItemGroup>
-
 </Project>
