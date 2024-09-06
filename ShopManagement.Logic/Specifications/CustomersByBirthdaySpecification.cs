@@ -7,6 +7,6 @@ public class CustomersByBirthdaySpecification : Specification<CustomerDb>
 {
     public CustomersByBirthdaySpecification(DateTime date)
     {
-        Query.Where(x => x.BirthDate.Date.Equals(date.Date));
+        Query.Where(x => x.BirthDate.Day == date.Day && x.BirthDate.Month == date.Month);
     }
 }
